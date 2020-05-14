@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<head>
+  <title>Site</title>
+</head>
+<body>
+  <script>
+    // var siteData = sessionStorage.getItem("siteData");
+    var siteData = localStorage["siteData"];
+    var parsedJSON = {};
+    if (siteData) {
+      parsedJSON = JSON.parse(siteData);
+    }
+    document.body.innerHTML = parsedJSON["message"];
+  </script>
+</body>

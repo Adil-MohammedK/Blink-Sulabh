@@ -1,0 +1,19 @@
+<script>
+  // GET is the default method, so we don't need to set it
+  //   fetch("https://blink-scraper.herokuapp.com/post")
+  //     .then(function (response) {
+  //       return response.text();
+  //     })
+  //     .then(function (text) {
+  //       // Print the greeting as text
+  //       console.log("GET response text:");
+  //       console.log(text);
+  //     });
+
+  // Send the same request
+  fetch("/https://blink-scraper.herokuapp.com/post").then(function (json) {
+    // Do anything with it!
+    console.log("GET response as JSON:");
+    console.log(json);
+  });
+</script>
