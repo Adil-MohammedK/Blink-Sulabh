@@ -12,17 +12,6 @@ def scrapmain(item):
     soup = BeautifulSoup(req.content, 'html.parser')
     print(soup.prettify())
     return soup.prettify()
-    # user_agent = get_random("user")
-    # referer=get_random("ref")
-    # headers = {
-    #     'user-agent': user_agent,
-    #     'referer':referer
-    # }
-    # r = requests.get(url,headers=headers,verify=False)
-    # print (BS(r.content, 'lxml'))
-    # response = requests.get("https://www.rural.nic.in.",verify=False)
-    # # sauce = response.read()
-    # print(response.content)
 
 
 def get_random(random_ua):
@@ -44,8 +33,18 @@ def get_random(random_ua):
     finally:
         return random_ua
 
+def findBody(text):
+    soup = BeautifulSoup(text, 'html.parser')
+    print("Body of HTML:")
+    output = ""
+    output=soup.body.prettify()
+    print(output)
+    return output
 
-
-# shoes #https://www.amazon.in/s?k=shoes&ref=nb_sb_noss_2
-# headphones #https://www.amazon.in/s?k=headphones&ref=nb_sb_noss_2
-# phones #https://www.amazon.in/s?k=phones&ref=nb_sb_noss_2
+def findHead(text):
+    soup = BeautifulSoup(text, 'html.parser')
+    print("Head of HTML:")
+    output = ""
+    output=soup.head.prettify()
+    # print(soup.head)
+    return output

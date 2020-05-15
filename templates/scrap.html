@@ -214,43 +214,10 @@
   </div>
   <script>
     function submit_message(url) {
-      // name = document.getElementById("name");
-
-      var entry = {
-        // name: name.value,
-        name: url,
-      };
-      fetch(`${window.origin}/getmsg`, {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(entry),
-        cache: "no-cache",
-        headers: new Headers({
-          "content-type": "application/json",
-        }),
-      })
-        .then(function (response) {
-          if (response.status !== 200) {
-            console.log(
-              `Looks like there was a problem. Status code: ${response.status}`
-            );
-            return;
-          }
-          response.json().then(function (data) {
-            console.log(data);
-            var Data = data.Message;
-            message.value = Data;
-            siteJSON = {};
-            siteJSON["message"] = Data;
-            const json = JSON.stringify(siteJSON);
-            // sessionStorage.setItem("siteData", Data);
-            localStorage.setItem("siteData", json);
-            visit_site();
-          });
-        })
-        .catch(function (error) {
-          console.log("Fetch error: " + error);
-        });
+      str = url;
+      urlFinal = window.origin + str.split("https://rural.nic.in").pop();
+      console.log("Url tail:" + urlFinal);
+      window.location.href = urlFinal;
     }
 
     function visit_site() {
