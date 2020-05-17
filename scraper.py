@@ -16,7 +16,6 @@ def scrapmain(item):
 def findBody(text):
     soup = BeautifulSoup(text, 'html.parser')
     print("Body of HTML:")
-    output = ""
     # output=soup.body.prettify()
     output=soup.body
     print(output)
@@ -25,7 +24,6 @@ def findBody(text):
 def findHead(text):
     soup = BeautifulSoup(text, 'html.parser')
     print("Head of HTML:")
-    output = ""
     # output=soup.head.prettify()
     output=soup.head
     # print(soup.head)

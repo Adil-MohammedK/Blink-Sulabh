@@ -13,6 +13,8 @@ def makeSite():
     return render_template("site.html")
 
 @app.route("/<var1>/<var2>")
+@app.route("/<var1>/<var2>/<var3>")
+@app.route("/<var1>/<var2>/<var3>/<var4>")
 @app.route("/<var1>/<var2>/<var3>/<var4>/<var5>")
 def multiple(var1, var2, var3="",var4="",var5=""):
     print(f"var1 is {var1}")
@@ -29,13 +31,13 @@ def multiple(var1, var2, var3="",var4="",var5=""):
 
     # output={}
     # output['Message'] = scraper.scrapmain(url)
-    htmlCode = scraper.scrapmain(url)
-    output = {}
-    output['head']=scraper.findHead(htmlCode)
-    output['body'] = scraper.findBody(htmlCode)
-    res="<!DOCTYPE html> <html> "+output['head']+"\n"+output['body']+ "</html>"
-    return res
-    # return make_response(render_template("site.html"),200)
+    # htmlCode = scraper.scrapmain(url)
+    # output = {}
+    # output['head']=scraper.findHead(htmlCode)
+    # output['body'] = scraper.findBody(htmlCode)
+    # res="<!DOCTYPE html> <html> "+output['head']+"\n"+output['body']+ "</html>"
+    # return res
+    return make_response(render_template("site.html"),200)
 
 @app.route("/getcode", methods=["POST"])
 def givecode():
@@ -46,9 +48,7 @@ def givecode():
     output = {}
     output['head']=scraper.findHead(htmlCode)
     output['body']=scraper.findBody(htmlCode)
-    res = make_response(jsonify(output), 200)
-    # res="<!DOCTYPE html> <html> "+output['head']+"\n"+output['body']+ "</html>"
-    return res
+    return make_response(jsonify(output), 200)
 
 # A welcome message to test our server
 @app.route('/')
