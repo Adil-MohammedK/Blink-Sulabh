@@ -20,12 +20,22 @@ def multiple(var1, var2, var3="",var4="",var5=""):
     print(f"var3 is {var3}")
     if var3=="":
         url="https://rural.nic.in/"+var1+"/"+var2
-    else:
+    elif var4=="":
         url = "https://rural.nic.in/" + var1 + "/" + var2 + "/" + var3
+    elif var5== "":
+        url = "https://rural.nic.in/" + var1 + "/" + var2 + "/" + var3 + "/" + var4
+    else:
+        url = "https://rural.nic.in/" + var1 + "/" + var2 + "/" + var3+ "/" + var4+"/"+var5
+
     # output={}
     # output['Message'] = scraper.scrapmain(url)
-    return make_response(render_template("site.html"),200)
-    # return output['Message']
+    htmlCode = scraper.scrapmain(url)
+    output = {}
+    output['head']=scraper.findHead(htmlCode)
+    output['body'] = scraper.findBody(htmlCode)
+    res="<!DOCTYPE html> <html> "+output['head']+"\n"+output['body']+ "</html>"
+    return res
+    # return make_response(render_template("site.html"),200)
 
 @app.route("/getcode", methods=["POST"])
 def givecode():
@@ -37,6 +47,7 @@ def givecode():
     output['head']=scraper.findHead(htmlCode)
     output['body']=scraper.findBody(htmlCode)
     res = make_response(jsonify(output), 200)
+    # res="<!DOCTYPE html> <html> "+output['head']+"\n"+output['body']+ "</html>"
     return res
 
 # A welcome message to test our server

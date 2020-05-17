@@ -1,5 +1,42 @@
 <!DOCTYPE html>
 <head>
+  <!-- <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/styles.css') }}"
+  />
+  <script src="{{url_for('static', filename='js/scripts.js')}}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <style>
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite; /* Safari */
+      animation: spin 2s linear infinite;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link
     rel="shortcut icon"
@@ -70,36 +107,6 @@
   </style>
   <style type="text/css" media="print">
     @import url("https://rural.nic.in/sites/all/themes/rural/css/print.css?q9v2lc");
-  </style>
-  <style>
-    .loader {
-      border: 16px solid #f3f3f3;
-      border-radius: 50%;
-      border-top: 16px solid #3498db;
-      width: 120px;
-      height: 120px;
-      -webkit-animation: spin 2s linear infinite; /* Safari */
-      animation: spin 2s linear infinite;
-    }
-
-    /* Safari */
-    @-webkit-keyframes spin {
-      0% {
-        -webkit-transform: rotate(0deg);
-      }
-      100% {
-        -webkit-transform: rotate(360deg);
-      }
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
   </style>
 
   <!--[if lte IE 7]>
@@ -514,9 +521,12 @@
           var body = data.body;
           var head = data.head;
           console.log(body);
+          console.log(head);
           $(document).ready(function () {
             $("head").html(head);
             $("body").html(body);
+            // document.getElementsByTagName("head")[0].innerHTML = head;
+            // document.getElementsByTagName("body")[0].innerHTML = body;
             // document.body.innerHTML = body;
           });
         });

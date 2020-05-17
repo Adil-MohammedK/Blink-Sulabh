@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
-import numpy as np
 
 def scrapmain(item):
     url = item
@@ -11,40 +10,23 @@ def scrapmain(item):
     req = requests.get(url, headers, verify=False)
     soup = BeautifulSoup(req.content, 'html.parser')
     print(soup.prettify())
-    return soup.prettify()
-
-
-def get_random(random_ua):
-    if random_ua == "user":
-        ua_file = 'ua_file.txt'
-    if random_ua == "ref":
-        ua_file = 'rf_file.txt'
-    try:
-        with open(ua_file) as f:
-            lines = f.readlines()
-        if len(lines) > 0:
-            prng = np.random.RandomState()
-            index = prng.permutation(len(lines) - 1)
-            idx = np.asarray(index, dtype=np.integer)[0]
-            random_proxy = lines[int(idx)]
-    except Exception as ex:
-        print('Exception in random_ua')
-        print(str(ex))
-    finally:
-        return random_ua
+    # return soup.prettify()
+    return str(soup)
 
 def findBody(text):
     soup = BeautifulSoup(text, 'html.parser')
     print("Body of HTML:")
     output = ""
-    output=soup.body.prettify()
+    # output=soup.body.prettify()
+    output=soup.body
     print(output)
-    return output
+    return str(output)
 
 def findHead(text):
     soup = BeautifulSoup(text, 'html.parser')
     print("Head of HTML:")
     output = ""
-    output=soup.head.prettify()
+    # output=soup.head.prettify()
+    output=soup.head
     # print(soup.head)
-    return output
+    return str(output)
