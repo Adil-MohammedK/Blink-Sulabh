@@ -1,8 +1,16 @@
-from flask import Flask, request, jsonify,render_template,make_response
+from flask import Flask, request, jsonify,render_template,make_response,after_this_request
 import scraper
 from flask_cors import CORS
 app = Flask(__name__)
 cors = CORS(app)
+JS=""
+file = open("static/JSCode.txt")
+for f in file:
+    JS += f
+file.close()
+htmlCode = ""
+head = ""
+body = ""
 
 @app.route('/scrapper')
 def getmsg():
@@ -26,14 +34,20 @@ def multiple(var1, var2, var3="",var4="",var5=""):
         url = "https://rural.nic.in/" + var1 + "/" + var2 + "/" + var3 + "/" + var4
     else:
         url = "https://rural.nic.in/" + var1 + "/" + var2 + "/" + var3+ "/" + var4+"/"+var5
-
-    # output={}
-    # output['Message'] = scraper.scrapmain(url)
     htmlCode = scraper.scrapmain(url)
-    output = {}
-    output['head']=scraper.findHead(htmlCode)
-    output['body'] = scraper.findBody(htmlCode)
-    res="<!DOCTYPE html> <html> "+output['head']+"\n"+output['body']+ "</html>"
+    global head
+    global body
+    head = scraper.findHead(htmlCode)
+    body = scraper.findBody(htmlCode)
+    # @after_this_request
+    # def sendBody(res):
+    #     output = {}
+    #     output['head'] = head
+    #     output['body'] = body
+    #     res = make_response(jsonify(output), 200)
+    #     return res
+
+    res = "<!DOCTYPE html> <html> \n " + head + "\n" + '<body class="html not-front not-logged-in one-sidebar sidebar-first page-about-us page-about-us-organisation-structure i18n-en">' + "\n" + body + JS + "</body> \n" + "</html>"
     return res
     # return make_response(render_template("site.html"),200)
 
@@ -42,10 +56,11 @@ def givecode():
     req = request.get_json()
     print("GetCode Fn")
     print(req)
-    htmlCode = scraper.scrapmain(req['name'])
     output = {}
-    output['head']=scraper.findHead(htmlCode)
-    output['body']=scraper.findBody(htmlCode)
+    global head
+    global body
+    output['head'] = head
+    output['body'] = body
     res = make_response(jsonify(output), 200)
     # res="<!DOCTYPE html> <html> "+output['head']+"\n"+output['body']+ "</html>"
     return res

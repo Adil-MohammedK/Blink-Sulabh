@@ -18,7 +18,7 @@ def findBody(text):
     print("Body of HTML:")
     output = ""
     # output=soup.body.prettify()
-    output=soup.body
+    output=soup.body.extract()
     print(output)
     return str(output)
 
