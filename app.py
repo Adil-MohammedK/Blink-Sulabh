@@ -3,11 +3,18 @@ import scraper
 from flask_cors import CORS
 app = Flask(__name__)
 cors = CORS(app)
+
 JS=""
-file = open("static/JSCode.txt")
+file = open("static/js/script.js")
 for f in file:
     JS += f
 file.close()
+CSS = ""
+file = open("static/css/styles.css")
+for f in file:
+    CSS += f
+file.close()
+
 htmlCode = ""
 head = ""
 body = ""
@@ -20,13 +27,16 @@ def getmsg():
 def makeSite():
     return render_template("site.html")
 
+@app.route("/")
 @app.route("/<var1>/<var2>")
 @app.route("/<var1>/<var2>/<var3>/<var4>/<var5>")
-def multiple(var1, var2, var3="",var4="",var5=""):
+def multiple(var1="", var2="", var3="",var4="",var5=""):
     print(f"var1 is {var1}")
     print(f"var2 is {var2}")
     print(f"var3 is {var3}")
-    if var3=="":
+    if var1 == "":
+        url="https://rural.nic.in/"
+    elif var3=="":
         url="https://rural.nic.in/"+var1+"/"+var2
     elif var4=="":
         url = "https://rural.nic.in/" + var1 + "/" + var2 + "/" + var3
@@ -39,17 +49,8 @@ def multiple(var1, var2, var3="",var4="",var5=""):
     global body
     head = scraper.findHead(htmlCode)
     body = scraper.findBody(htmlCode)
-    # @after_this_request
-    # def sendBody(res):
-    #     output = {}
-    #     output['head'] = head
-    #     output['body'] = body
-    #     res = make_response(jsonify(output), 200)
-    #     return res
-
-    res = "<!DOCTYPE html> <html> \n " + head + "\n" + '<body class="html not-front not-logged-in one-sidebar sidebar-first page-about-us page-about-us-organisation-structure i18n-en">' + "\n" + body + JS + "</body> \n" + "</html>"
+    res = " <!DOCTYPE html><html>\n " + head  + "\n" + CSS + "</head>" + body + JS + "</body> \n" + "</html>"
     return res
-    # return make_response(render_template("site.html"),200)
 
 @app.route("/getcode", methods=["POST"])
 def givecode():
@@ -66,9 +67,9 @@ def givecode():
     return res
 
 # A welcome message to test our server
-@app.route('/')
-def index():
-    return render_template("index.html")
+# @app.route('/')
+# def index():
+#     return render_template("index.html")
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support

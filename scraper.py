@@ -11,22 +11,27 @@ def scrapmain(item):
     soup = BeautifulSoup(req.content, 'lxml')
     print(soup.prettify())
     # return soup.prettify()
-    return str(soup)
+    return str(soup.prettify())
 
 def findBody(text):
     soup = BeautifulSoup(text, 'lxml')
     print("Body of HTML:")
     output = ""
-    # output=soup.body.prettify()
-    output=soup.body
-    print(output.extract())
-    return str(output.extract())
+    output = soup.body.prettify()
+    newOutput = ""
+    for line in output.splitlines():
+        if line == "</body>":
+            line = ""
+        newOutput += line
+    print(newOutput)
+    return newOutput
 
 def findHead(text):
     soup = BeautifulSoup(text, 'lxml')
     print("Head of HTML:")
     output = ""
-    # output=soup.head.prettify()
-    output=soup.head
-    # print(soup.head)
+    output=soup.head.prettify()
     return str(output)
+
+# code = scrapmain("https://www.google.com")
+# Body=findBody(code)
