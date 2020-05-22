@@ -8,22 +8,22 @@ def scrapmain(item):
     headers.update(
         {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'})
     req = requests.get(url, headers, verify=False)
-    soup = BeautifulSoup(req.content, 'html.parser')
+    soup = BeautifulSoup(req.content, 'lxml')
     print(soup.prettify())
     # return soup.prettify()
     return str(soup)
 
 def findBody(text):
-    soup = BeautifulSoup(text, 'html.parser')
+    soup = BeautifulSoup(text, 'lxml')
     print("Body of HTML:")
     output = ""
     # output=soup.body.prettify()
-    output=soup.body.extract()
-    print(output)
-    return str(output)
+    output=soup.body
+    print(output.extract())
+    return str(output.extract())
 
 def findHead(text):
-    soup = BeautifulSoup(text, 'html.parser')
+    soup = BeautifulSoup(text, 'lxml')
     print("Head of HTML:")
     output = ""
     # output=soup.head.prettify()
