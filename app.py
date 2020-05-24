@@ -1,23 +1,14 @@
-from flask import Flask, request, jsonify,render_template,make_response,after_this_request
+from flask import Flask, request, jsonify,render_template,make_response
 import scraper
 from flask_cors import CORS
+import codemaker
 app = Flask(__name__)
 cors = CORS(app)
+from bs4 import BeautifulSoup
 
-JS=""
-file = open("static/js/script.js")
-for f in file:
-    JS += f
-file.close()
-CSS = ""
-file = open("static/css/styles.css")
-for f in file:
-    CSS += f
-file.close()
-
-htmlCode = ""
-head = ""
-body = ""
+htmlCode = BeautifulSoup("",'lxml')
+head = BeautifulSoup("",'lxml')
+body = BeautifulSoup("",'lxml')
 
 @app.route('/scrapper')
 def getmsg():
@@ -49,8 +40,8 @@ def multiple(var1="", var2="", var3="",var4="",var5=""):
     global body
     head = scraper.findHead(htmlCode)
     body = scraper.findBody(htmlCode)
-    res = " <!DOCTYPE html><html>\n " + head  + "\n" + CSS + "</head>" + body + JS + "</body> \n" + "</html>"
-    return res
+    myCode = {'head':head,'body':body}
+    return render_template("newsite.html",myCode=myCode)
 
 @app.route("/getcode", methods=["POST"])
 def givecode():
@@ -62,8 +53,9 @@ def givecode():
     global body
     output['head'] = head
     output['body'] = body
+    print("Body:")
+    print(output['body'])
     res = make_response(jsonify(output), 200)
-    # res="<!DOCTYPE html> <html> "+output['head']+"\n"+output['body']+ "</html>"
     return res
 
 # A welcome message to test our server
@@ -73,4 +65,4 @@ def givecode():
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(debug=True,threaded=True, port=5000)
+    app.run(debug=True, port=5000)

@@ -1,4 +1,3 @@
-<script>
 var body, head;
 $(document).ready(function () {
   url = window.location.href;
@@ -27,11 +26,10 @@ $(document).ready(function () {
         head = data.head;
         console.log(body);
         console.log(head);
-        alert(body)
+        alert(body);
       });
     })
     .catch(function (error) {
       console.log("Fetch error: " + error);
     });
 });
-</script>
