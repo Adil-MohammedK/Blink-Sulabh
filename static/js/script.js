@@ -1,4 +1,5 @@
 var body, head;
+document.getElementById("loader").style.visibility = "hidden";
 $(document).ready(function () {
   url = window.location.href;
   var entry = {
@@ -26,10 +27,12 @@ $(document).ready(function () {
         head = data.head;
         console.log(body);
         console.log(head);
-        alert(body);
+        // alert(body);
       });
     })
     .catch(function (error) {
       console.log("Fetch error: " + error);
     });
+  var flag = performance.navigation.type;
+  console.log(flag);
 });
