@@ -33,6 +33,4 @@ $(document).ready(function () {
     .catch(function (error) {
       console.log("Fetch error: " + error);
     });
-  var flag = performance.navigation.type;
-  console.log(flag);
 });
