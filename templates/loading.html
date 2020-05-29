@@ -71,28 +71,12 @@
       <p>Loading</p>
     </div>
     <script>
-      // var url = "{{text}}";
       var data;
-      str = window.location.href;
-      data = "https://rural.nic.in" + str.split(window.origin).pop();
-      console.log("Url tail:" + data);
       // $.post(url, {
       //   javascript_data: data,
       // });
-      var entry = {
-        name: data,
-      };
-      fetch(`${window.origin}/getsite`, {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(entry),
-        cache: "no-cache",
-        headers: new Headers({
-          "content-type": "application/json",
-        }),
-      });
       console.log("Refreshing");
-      window.location.href = window.origin + "/getsite";
+      window.location.href = window.location.href;
     </script>
   </body>
 </html>
