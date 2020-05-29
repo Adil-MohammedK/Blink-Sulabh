@@ -9,15 +9,28 @@
     />
   </head>
   <body>
+    <div id="loader" class="center" style="display: none;">
+      <div class="bar">
+        <div class="circle"></div>
+        <p
+          style="
+            position: absolute;
+            top: -25px;
+            right: -85px;
+            text-transform: uppercase;
+            color: #347fc3;
+            font-family: helvetica, sans-serif;
+            font-weight: bold;
+          "
+        >
+          Loading
+        </p>
+      </div>
+    </div>
     <div id="body">
       {% autoescape false %} {{myCode.body}} {% endautoescape %}
     </div>
-    <div id="loader" style="display: none;">
-      <div class="bar">
-        <div class="circle"></div>
-        <p>Loading</p>
-      </div>
-    </div>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script src="{{url_for('static', filename='js/loader.js')}}"></script>
   </body>
 </html>
