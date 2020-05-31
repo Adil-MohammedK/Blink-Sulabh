@@ -49,6 +49,9 @@
           .done(function (data) {
             // Show formatted JSON on webpage.
             $("#responseTextArea").val(JSON.stringify(data, null, 2));
+            var caption = data.description.captions[0].text;
+            console.log(caption);
+            document.getElementById("description").value = caption;
           })
 
           .fail(function (jqXHR, textStatus, errorThrown) {
@@ -95,6 +98,10 @@
         <br /><br />
         <img id="sourceImage" width="400" />
       </div>
+    </div>
+    <div id="image-descip" style="width: 20px; height: auto;">
+      Caption:
+      <textarea id="description" style="width: 600px; height: 20px;"></textarea>
     </div>
 
     <p id="demo"></p>
