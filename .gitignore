@@ -1,1 +1,5 @@
-./_pycache_ # Folder for VS Code Python Linting
+launch.json
+*.pyc
+__pycache__/scraper.cpython-38.pyc
+__pycache__/app.cpython-38.pyc
+__pycache__/codemaker.cpython-38.pyc

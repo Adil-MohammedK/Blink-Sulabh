@@ -8,23 +8,40 @@ def scrapmain(item):
     headers.update(
         {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'})
     req = requests.get(url, headers, verify=False)
-    soup = BeautifulSoup(req.content, 'html.parser')
+    soup = BeautifulSoup(req.content, 'lxml')
     print(soup.prettify())
     # return soup.prettify()
-    return str(soup)
+    return soup.prettify()
 
 def findBody(text):
-    soup = BeautifulSoup(text, 'html.parser')
+    soup = BeautifulSoup(text, 'lxml')
     print("Body of HTML:")
-    # output=soup.body.prettify()
-    output=soup.body
-    print(output)
-    return str(output)
+    output = ""
+    output = str(soup.body)
+    newOutput = ""
+    for line in output.splitlines():
+        if line == "</body>":
+            line = "\n"
+        newOutput += line+"\n"
+    print(newOutput)
+    return newOutput
 
 def findHead(text):
-    soup = BeautifulSoup(text, 'html.parser')
+    soup = BeautifulSoup(text, 'lxml')
     print("Head of HTML:")
-    # output=soup.head.prettify()
-    output=soup.head
-    # print(soup.head)
-    return str(output)
+    output = ""
+    output = str(soup.head)
+    title=str(soup.head.title.text)
+    newOutput = ""
+    for line in output.splitlines():
+        if line == "</head>" or line=="<head>":
+            line = "\n"
+        newOutput += line + "\n"
+    newSoup = BeautifulSoup(newOutput, 'lxml')
+    print(newSoup.prettify())
+    return newSoup.prettify(), title
+    # return str(output)
+
+# code = scrapmain("https://rural.nic.in/")
+# Body = findBody(code)
+# Head = findHead(code)
