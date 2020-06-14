@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <title>{{title}}</title>
-    {% autoescape false %} {{myCode.head}} {% endautoescape %}
     <link
       rel="stylesheet"
       href="{{ url_for('static',filename='css/styles.css') }}"
     />
+    {% autoescape false %} {{myCode.head}} {% endautoescape %}
   </head>
   <body>
     <div id="loader" class="center" style="display: none;">
@@ -27,10 +27,52 @@
         </p>
       </div>
     </div>
-    <div id="body">
+
+    <div id="body" class="body-bg">
+      <div class="user">
+        <button class="modal-btn">User Settings</button>
+      </div>
       {% autoescape false %} {{myCode.body}} {% endautoescape %}
     </div>
-    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+
+    <div class="modal-bg">
+      <div class="modal">
+        <label for="name">Name: </label>
+        <input type="text" name="name" />
+        <button type="button" id="LinkButton">
+          Links
+        </button>
+        <button type="button" id="ImgButton">
+          Imgs
+        </button>
+
+        <span class="modal-close">X</span>
+      </div>
+    </div>
+
     <script src="{{url_for('static', filename='js/loader.js')}}"></script>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script src="{{url_for('static', filename='js/findText.js')}}"></script>
+    <script>
+      // var $container = $('<div/>').html(html);
+      var linkData, imgData;
+      document.getElementById('LinkButton').onclick = function (linkData) {
+        linkData = findLinks(html);
+        console.log(linkData);
+      };
+      document.getElementById('ImgButton').onclick = function (imgData) {
+        imgData = findLinks(html);
+        console.log(imgData);
+      };
+      var modalBtn = document.querySelector('.modal-btn');
+      var modalBg = document.querySelector('.modal-bg');
+      var modalClose = document.querySelector('.modal-close');
+      modalBtn.addEventListener('click', function () {
+        modalBg.classList.add('bg-active');
+      });
+      modalClose.addEventListener('click', function () {
+        modalBg.classList.remove('bg-active');
+      });
+    </script>
   </body>
 </html>
