@@ -6,8 +6,10 @@ cors = CORS(app)
 from bs4 import BeautifulSoup
 
 htmlCode = BeautifulSoup("",'lxml')
-head = BeautifulSoup("",'lxml')
-body = BeautifulSoup("",'lxml')
+# head = BeautifulSoup("",'lxml')
+head = ""
+body = ""
+# body = BeautifulSoup("",'lxml')
 url=""
 flag=False
 
@@ -39,12 +41,13 @@ def loader(var1="", var2="", var3="", var4="", var5=""):
         flag = True
         print("First Time")
         return render_template("loading.html",text=url)
+    global htmlCode
     htmlCode = scraper.scrapmain(url)
     global body
     global head
     head,title = scraper.findHead(htmlCode)
     body = scraper.findBody(htmlCode)
-    myCode = {'head':head,'body':body}
+    myCode = {'head':head,'body':body,'html':htmlCode}
     return render_template("site.html", myCode=myCode, title=title)
     # return render_template("loading.html")
 
@@ -54,10 +57,12 @@ def givecode():
     print("GetCode Fn")
     print(req)
     output = {}
+    global htmlCode
     global head
     global body
     output['head'] = head
     output['body'] = body
+    output['html'] = htmlCode
     # print("Body:")
     # print(output['body'])
     res = make_response(jsonify(output), 200)
