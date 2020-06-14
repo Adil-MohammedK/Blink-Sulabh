@@ -35,7 +35,7 @@ def findHead(text):
     newOutput = ""
     # bad=["<html>","</html>","<head>","</head>"]
     for line in output.splitlines():
-        if line == '<head>':
+        if line == '<head>' or line=='</head>':
             line=""
         newOutput += line + "\n"
     # newSoup = BeautifulSoup(newOutput, 'lxml')
