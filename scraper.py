@@ -33,15 +33,18 @@ def findHead(text):
     output = str(soup.head)
     title=str(soup.head.title.text)
     newOutput = ""
+    # bad=["<html>","</html>","<head>","</head>"]
     for line in output.splitlines():
-        if line == "</head>" or line=="<head>":
-            line = "\n"
+        if line == '<head>':
+            line=""
         newOutput += line + "\n"
-    newSoup = BeautifulSoup(newOutput, 'lxml')
-    print(newSoup.prettify())
-    return newSoup.prettify(), title
+    # newSoup = BeautifulSoup(newOutput, 'lxml')
+    print(newOutput)
+    return str(newOutput), title
     # return str(output)
 
 # code = scrapmain("https://rural.nic.in/")
 # Body = findBody(code)
 # Head = findHead(code)
+# print(Head)
+# print(Body)
