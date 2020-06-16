@@ -9,7 +9,7 @@ def scrapmain(item):
         {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'})
     req = requests.get(url, headers, verify=False)
     soup = BeautifulSoup(req.content, 'lxml')
-    print(soup.prettify())
+    # print(soup.prettify())
     # return soup.prettify()
     return soup.prettify()
 
@@ -23,7 +23,7 @@ def findBody(text):
         if line == "</body>":
             line = "\n"
         newOutput += line+"\n"
-    print(newOutput)
+    # print(newOutput)
     return newOutput
 
 def findHead(text):
@@ -39,7 +39,7 @@ def findHead(text):
             line=""
         newOutput += line + "\n"
     # newSoup = BeautifulSoup(newOutput, 'lxml')
-    print(newOutput)
+    # print(newOutput)
     return str(newOutput), title
     # return str(output)
 
