@@ -6,6 +6,20 @@
       rel="stylesheet"
       href="{{ url_for('static',filename='css/styles.css') }}"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://usefulangle.com/sitejs/jquery-2.1.1.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link
+      href="https://usefulangle.com/sitecss/prism.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
     {% autoescape false %} {{myCode.head}} {% endautoescape %}
   </head>
   <body>
@@ -27,32 +41,51 @@
         </p>
       </div>
     </div>
-
-    <div id="body" class="body-bg">
-      <div class="user">
-        <button class="modal-btn">User Settings</button>
+    <div id="main" onmousemove="showCoords(event)">
+      <div id="body" class="body-bg">
+        <div class="user">
+          <button class="modal-btn">User Settings</button>
+        </div>
+        {% autoescape false %} {{myCode.body}} {% endautoescape %}
       </div>
-      {% autoescape false %} {{myCode.body}} {% endautoescape %}
     </div>
 
     <div class="modal-bg">
       <div class="modal">
-        <label for="name">Name: </label>
-        <input type="text" name="name" />
         <button type="button" id="LinkButton">
           Links
         </button>
         <button type="button" id="ImgButton">
           Imgs
         </button>
-
+        <!-- contains the coodinates of the mouse
+        <p id="coords">coords</p>
+        <!--displays text inside of the tag-->
+        <!-- <p id="elementName">elementText</p> -->
+        <!-- Power button for text to speech feature-->
+        <button id="power" type="button" onclick="textToSpeechPower()">
+          Off
+        </button>
+        <h4>Example &mdash; Text to Speech</h4>
+        <div id="demo-container">
+          <select id="chosen-voice"></select
+          ><input
+            type="text"
+            id="speak-text"
+            placeholder="Enter text to speak"
+          /><button id="speak-button">Speak</button>
+        </div>
         <span class="modal-close">X</span>
       </div>
     </div>
 
     <script src="{{url_for('static', filename='js/loader.js')}}"></script>
+    <script src="{{url_for('static', filename='js/googleanalytics.js')}}"></script>
+    <script src="{{url_for('static', filename='js/scrollbar.js')}}"></script>
+    <script src="{{url_for('static', filename='js/text2speech.js')}}"></script>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
     <script src="{{url_for('static', filename='js/findText.js')}}"></script>
+    <script src="https://usefulangle.com/sitejs/prism.js" defer></script>
     <script>
       // var $container = $('<div/>').html(html);
       var linkData, imgData;
