@@ -41,7 +41,11 @@
         </p>
       </div>
     </div>
-    <div id="main" onmousemove="showCoords(event)">
+    <div
+      id="main"
+      onmousemove="showCoords(event,'Hover')"
+      ontouchmove="showCoords(event,'Touch')"
+    >
       <div id="body" class="body-bg">
         <div class="user">
           <button class="modal-btn">User Settings</button>
