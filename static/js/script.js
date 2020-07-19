@@ -7,7 +7,7 @@ $(document).ready(function () {
   var entry = {
     name: url,
   };
-  fetch(`${window.origin}/getcode`, {
+  fetch(`${window.origin}/getsite/getcode`, {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify(entry),

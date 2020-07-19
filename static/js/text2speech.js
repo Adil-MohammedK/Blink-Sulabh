@@ -1,7 +1,5 @@
 var available_voices;
-var TTS_Power = localStorage.getItem('TTS_Power');
-console.log('TTS Power on start: ' + TTS_Power);
-if (TTS_Power == 'On') textToSpeechPower();
+
 if (window.speechSynthesis.getVoices().length == 0) {
   window.speechSynthesis.addEventListener('voiceschanged', function () {
     getVoiceList();
@@ -66,9 +64,18 @@ function showCoords(event, type) {
   coords = 'X coords: ' + x + ', Y coords: ' + y;
   // document.getElementById("coords").innerHTML = coords;
   elementMouseIsOver = document.elementFromPoint(x, y);
-
-  // document.getElementById("elementName").innerHTML = elementMouseIsOver.innerText;
+  var prevSrc = '';
   text = elementMouseIsOver.innerText;
+  if (elementMouseIsOver.tagName == 'IMG') {
+    text = elementMouseIsOver.alt;
+    if (elementMouseIsOver.alt == '' && prevSrc != elementMouseIsOver.src) {
+      text = processImage(elementMouseIsOver.src);
+      prevSrc = text;
+    }
+    console.log('TTS text: ' + text);
+  }
+  // document.getElementById("elementName").innerHTML = elementMouseIsOver.innerText;
+
   // else if (type == 'Touch')
 
   if ((text != '') & (document.getElementById('power').innerHTML == 'On')) {

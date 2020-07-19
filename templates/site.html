@@ -67,9 +67,7 @@
         <!--displays text inside of the tag-->
         <!-- <p id="elementName">elementText</p> -->
         <!-- Power button for text to speech feature-->
-        <button id="power" type="button" onclick="textToSpeechPower()">
-          Off
-        </button>
+        <button id="power" type="button" onclick="textToSpeechPower()"></button>
         <h4>Example &mdash; Text to Speech</h4>
         <div id="demo-container">
           <select id="chosen-voice"></select
@@ -83,15 +81,21 @@
       </div>
     </div>
 
-    <script src="{{url_for('static', filename='js/loader.js')}}"></script>
+    <!-- <script src="{{url_for('static', filename='js/loader.js')}}"></script> -->
     <script src="{{url_for('static', filename='js/googleanalytics.js')}}"></script>
     <script src="{{url_for('static', filename='js/scrollbar.js')}}"></script>
     <script src="{{url_for('static', filename='js/text2speech.js')}}"></script>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
     <script src="{{url_for('static', filename='js/findText.js')}}"></script>
+    <script src="{{url_for('static', filename='js/image-caption.js')}}"></script>
     <script src="https://usefulangle.com/sitejs/prism.js" defer></script>
     <script>
       // var $container = $('<div/>').html(html);
+      var TTS_Power = localStorage.getItem('TTS_Power');
+      console.log('TTS Power on start: ' + TTS_Power);
+      if (TTS_Power == 'null')
+        document.getElementById('power').innerHTML = 'Off';
+      document.getElementById('power').innerHTML = TTS_Power;
       var linkData, imgData;
       document.getElementById('LinkButton').onclick = function (linkData) {
         linkData = findLinks(html);
