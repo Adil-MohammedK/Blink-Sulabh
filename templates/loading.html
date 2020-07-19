@@ -18,7 +18,7 @@
         width: 500px;
         margin: 0 auto;
         background: #fff;
-        margin-top: 300px;
+        margin-top: 150px;
       }
 
       .circle {
@@ -31,11 +31,12 @@
         background: #fff;
         border-radius: 30%;
         -webkit-animation: move 5s infinite;
+        animation: move 5s infinite;
       }
 
       p {
         position: absolute;
-        top: -25px;
+        top: -35px;
         right: -85px;
         text-transform: uppercase;
         color: #347fc3;
@@ -63,6 +64,26 @@
           right: 100%;
         }
       }
+      @keyframes move {
+        0% {
+          left: 0;
+        }
+        50% {
+          left: 100%;
+          transform: rotate(450deg);
+          width: 150px;
+          height: 150px;
+        }
+        75% {
+          left: 100%;
+          transform: rotate(450deg);
+          width: 150px;
+          height: 150px;
+        }
+        100% {
+          right: 100%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -71,12 +92,28 @@
       <p>Loading</p>
     </div>
     <script>
+      // var url = "{{text}}";
       var data;
+      str = window.location.href;
+      data = 'https://rural.nic.in' + str.split(window.origin).pop();
+      console.log('Url tail:' + data);
       // $.post(url, {
       //   javascript_data: data,
       // });
-      console.log("Refreshing");
-      window.location.href = window.location.href;
+      var entry = {
+        name: data,
+      };
+      fetch(`${window.origin}/getsite`, {
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify(entry),
+        cache: 'no-cache',
+        headers: new Headers({
+          'content-type': 'application/json',
+        }),
+      });
+      console.log('Refreshing');
+      window.location.href = window.origin + '/getsite';
     </script>
   </body>
 </html>
