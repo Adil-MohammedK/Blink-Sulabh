@@ -3,3 +3,4 @@ launch.json
 __pycache__/scraper.cpython-38.pyc
 __pycache__/app.cpython-38.pyc
 __pycache__/codemaker.cpython-38.pyc
+.vscode/settings.json
