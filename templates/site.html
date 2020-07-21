@@ -115,5 +115,14 @@
         modalBg.classList.remove('bg-active');
       });
     </script>
+    <script>
+      var head = document.getElementsByTagName('head')[0];
+      var js = document.createElement('script');
+
+      if (TTS) {
+        js.src = 'js/jquery_computer.js';
+      }
+      head.appendChild(js);
+    </script>
   </body>
 </html>

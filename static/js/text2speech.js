@@ -70,7 +70,7 @@ function showCoords(event, type) {
     text = elementMouseIsOver.alt;
     if (elementMouseIsOver.alt == '' && prevSrc != elementMouseIsOver.src) {
       text = processImage(elementMouseIsOver.src);
-      prevSrc = text;
+      prevSrc = elementMouseIsOver.src;
     }
     console.log('TTS text: ' + text);
   }
@@ -86,6 +86,17 @@ function showCoords(event, type) {
     utter.voice = available_voices[$('#chosen-voice').val()];
     var synth = window.speechSynthesis;
     synth.speak(utter);
+    var innerHTML = elementMouseIsOver.innerHTML;
+    var index = innerHTML.indexOf(text);
+    if (index >= 0) {
+      innerHTML =
+        innerHTML.substring(0, index) +
+        '<mark>' +
+        innerHTML.substring(index, index + text.length) +
+        '</mark>' +
+        innerHTML.substring(index + text.length);
+      elementMouseIsOver.innerHTML = innerHTML;
+    }
   }
   if (type == 'Hover') {
     document
@@ -93,6 +104,7 @@ function showCoords(event, type) {
       .addEventListener('mouseout', function (event) {
         event.preventDefault();
         window.speechSynthesis.cancel();
+        removeMark();
       });
   } else if (type == 'Touch') {
     document
@@ -100,16 +112,17 @@ function showCoords(event, type) {
       .addEventListener('touchend', function (event) {
         event.preventDefault();
         window.speechSynthesis.cancel();
+        removeMark();
       });
   }
 }
-
-function addTTS(body) {
-  document.querySelectorAll('*').forEach(function (node) {
-    var attr = document.createAttribute('ontouchmove');
-    var text = node.innerText;
-    attr.value = "showCoords(event,'Touch',text)";
-    node.setAttribute(attr);
-  });
-  console.log('TTS touchmove added');
+function removeMark() {
+  var mark = document.getElementsByTagName('mark');
+  while (mark.length) {
+    var parent = mark[0].parentNode;
+    while (mark[0].firstChild) {
+      parent.insertBefore(mark[0].firstChild, mark[0]);
+    }
+    parent.removeChild(mark[0]);
+  }
 }

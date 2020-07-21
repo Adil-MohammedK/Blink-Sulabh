@@ -7,7 +7,7 @@ $(document).ready(function () {
   var entry = {
     name: url,
   };
-  fetch(`${window.origin}/getsite/getcode`, {
+  fetch(`${window.origin}/getcode`, {
     method: 'POST',
     credentials: 'include',
     body: JSON.stringify(entry),
@@ -26,12 +26,7 @@ $(document).ready(function () {
       response.json().then(function (data) {
         console.log(data);
         html = data.html;
-        body = data.body;
-        head = data.head;
-        // console.log(body);
-        // console.log(head);
         console.log(html);
-        // alert(body);
       });
     })
     .catch(function (error) {
