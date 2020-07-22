@@ -1,3 +1,8 @@
+var images = document.getElementsByTagName('img');
+for (var i = 0; i < images.length; i++) {
+  str = images[i].src.split('https://rural.nic.in/').pop();
+  images[i].src = 'https://rural.nic.in/' + str.split(window.origin).pop();
+}
 function findLinks(htmlString) {
   var $container = $('<div/>').html(htmlString);
 
