@@ -24,7 +24,7 @@ def getmsg():
 def loader(var1="", var2="", var3="", var4="", var5=""):
     global url
     if var1 == "":
-        url = "https://rural.nic.in/"
+        url = "https://rural.nic.in"
     elif var2 == "":
         url = "https://rural.nic.in/" + var1
     elif var3 == "":
