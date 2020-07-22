@@ -18,6 +18,7 @@ def getmsg():
 
 
 @app.route("/", methods=['GET', 'POST'])
+@app.route("/<var1>",methods=['GET','POST'])
 @app.route("/<var1>/<var2>",methods=['GET','POST'])
 @app.route("/<var1>/<var2>/<var3>",methods=['GET','POST'])
 @app.route("/<var1>/<var2>/<var3>/<var4>/<var5>",methods=['GET','POST'])
