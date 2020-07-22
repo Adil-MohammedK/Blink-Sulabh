@@ -1,3 +1,4 @@
+var caption;
 function processImage(imgUrl) {
   // **********************************************
   // *** Update or verify the following values. ***
@@ -39,10 +40,9 @@ function processImage(imgUrl) {
     .done(function (data) {
       // Show formatted JSON on webpage.
       //   $('#responseTextArea').val(JSON.stringify(data, null, 2));
-      var caption = data.description.captions[0].text;
+      caption = data.description.captions[0].text;
       console.log('Image caption: ' + caption);
       //   document.getElementById('description').value = caption;
-      return caption;
     })
 
     .fail(function (jqXHR, textStatus, errorThrown) {

@@ -65,11 +65,28 @@ function showCoords(event, type) {
   // document.getElementById("coords").innerHTML = coords;
   elementMouseIsOver = document.elementFromPoint(x, y);
   var prevSrc = '';
-  text = elementMouseIsOver.innerText;
+  // Changed part for ignoring whitespaces or html tags with a child tags more than 1
+  //text = elementMouseIsOver.innerText;
+  if (elementMouseIsOver.children.length > 0) {
+    if (elementMouseIsOver.children.length == 1) {
+      // document.getElementById('elementName').innerHTML =
+      //   elementMouseIsOver.childNodes[0].nodeValue; //takes the text value of the orginal tag and not child tag
+      var text = elementMouseIsOver.childNodes[0].nodeValue;
+    } else {
+      return 0; //to ignore text inside child tags if present
+    }
+  } else {
+    // document.getElementById('elementName').innerHTML =
+    //   elementMouseIsOver.innerText;
+    var text = elementMouseIsOver.innerText;
+  }
+
+  //end of changes
   if (elementMouseIsOver.tagName == 'IMG') {
     text = elementMouseIsOver.alt;
     if (elementMouseIsOver.alt == '' && prevSrc != elementMouseIsOver.src) {
-      text = processImage(elementMouseIsOver.src);
+      processImage(elementMouseIsOver.src);
+      setTimeout((text = caption), 3000);
       prevSrc = elementMouseIsOver.src;
     }
     console.log('TTS text: ' + text);
@@ -86,16 +103,18 @@ function showCoords(event, type) {
     utter.voice = available_voices[$('#chosen-voice').val()];
     var synth = window.speechSynthesis;
     synth.speak(utter);
-    var innerHTML = elementMouseIsOver.innerHTML;
-    var index = innerHTML.indexOf(text);
-    if (index >= 0) {
-      innerHTML =
-        innerHTML.substring(0, index) +
-        '<mark>' +
-        innerHTML.substring(index, index + text.length) +
-        '</mark>' +
-        innerHTML.substring(index + text.length);
-      elementMouseIsOver.innerHTML = innerHTML;
+    if (text != 'X') {
+      var innerHTML = elementMouseIsOver.innerHTML;
+      var index = innerHTML.indexOf(text);
+      if (index >= 0) {
+        innerHTML =
+          innerHTML.substring(0, index) +
+          '<mark>' +
+          innerHTML.substring(index, index + text.length) +
+          '</mark>' +
+          innerHTML.substring(index + text.length);
+        elementMouseIsOver.innerHTML = innerHTML;
+      }
     }
   }
   if (type == 'Hover') {
