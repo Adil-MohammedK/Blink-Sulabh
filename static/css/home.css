@@ -1,0 +1,560 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans',
+    'DejaVu Sans', Verdana, 'sans-serif';
+  background-color: white;
+  color: #333333;
+}
+.navbar {
+  background-color: black;
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  font-size: 18px;
+  padding: 0 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.navbar a {
+  text-decoration: none;
+  color: #ffffff;
+}
+.navbar a.navbar-brand {
+  float: left;
+  height: inherit;
+  line-height: inherit;
+  padding: 0 30px;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+.navbar a.navbar-brand span {
+  font-size: 28px;
+  font-weight: 700;
+}
+.navbar ul {
+  float: right;
+  list-style: none;
+  height: inherit;
+  line-height: inherit;
+  padding: 0 50px;
+}
+.navbar ul li {
+  display: inline-block;
+}
+.navbar ul li a {
+  display: block;
+  text-align: center;
+  min-width: 120px;
+  padding: 0 30px;
+}
+.navbar ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.navbar .navbar-toggler {
+  display: none;
+}
+
+.intro {
+  width: 100%;
+  height: 100vh;
+  background: #373b44; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #4286f4,
+    #373b44
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #4286f4,
+    #373b44
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-size: cover;
+  /*background color: #000000;*/
+}
+.container {
+  position: relative;
+  height: 100vh;
+  color: #ffffff;
+}
+#sect1 h2,
+#sect2 h2,
+#sect3 h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20vh;
+}
+#sect1 {
+  background: #c6ffdd; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #f7797d,
+    #fbd786,
+    #c6ffdd
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #f7797d,
+    #fbd786,
+    #c6ffdd
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#sect2 {
+  background: #c31432; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #240b36,
+    #c31432
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #240b36,
+    #c31432
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#sect3 {
+  background: #ff416c; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #ff4b2b,
+    #ff416c
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #ff4b2b,
+    #ff416c
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+@media (max-width: 991px) {
+  .navbar ul {
+    padding: 0 10px;
+  }
+  .navbar ul li a {
+    min-width: 100px;
+    padding: 0 20px;
+  }
+}
+@media (max-width: 767px) {
+  .navbar {
+    padding: 0;
+  }
+  .navbar ul {
+    width: 100%;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 100vh;
+    max-height: 0;
+    overflow: hidden;
+    transition: all ease-in-out 0.3s;
+  }
+  .navbar ul.open {
+    /*toggled class name is open*/
+    max-height: 100vh;
+  }
+  .navbar ul li {
+    width: 100%;
+  }
+  .navbar ul li a {
+    padding: 0;
+  }
+  .navbar .navbar-toggler {
+    display: block;
+    position: absolute;
+    height: 40px;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    padding: 0 5px;
+    cursor: pointer;
+  }
+  /*for making hamburger menu*/
+  .navbar .navbar-toggler span,
+  .navbar .navbar-toggler span::before,
+  .navbar .navbar-toggler span::after {
+    display: block;
+    content: '';
+    background-color: #ffffff;
+    height: 3px;
+    width: 28px;
+    border-radius: 4px;
+    transition: all ease-in-out 0.3s;
+  }
+  .navbar .navbar-toggler span::before {
+    transform: translateY(-8px);
+  }
+  .navbar .navbar-toggler span::after {
+    transform: translateY(5px);
+  }
+  /*for close button*/
+  .navbar .navbar-toggler .open-navbar-toggler span {
+    /*toggled class name is open navbar toggler*/
+    background-color: transparent; /*only one bar of menu needed*/
+    transform: scale(0.85) rotate(270deg);
+  }
+  .navbar .navbar-toggler .open-navbar-toggler span::before {
+    transform: translateY(0px) scale(0.75) rotate(45deg);
+  }
+  .navbar .navbar-toggler .open-navbar-toggler span::after {
+    transform: translateY(-3px) scale(0.75) rotate(-45deg); /*brings this bar of menu to same level*/
+  }
+}
+@media (min-width: 800px) {
+  #logo_main {
+    display: block;
+    margin-right: auto;
+    width: 50%;
+    min-width: 300px;
+    margin-left: 2.5%;
+    padding: 30vh 0;
+    /*position: absolute;*/
+  }
+
+  #feature1 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-4vh);
+    transform: translateY(-4vh);
+    width: 6%;
+    min-width: 30px;
+    /*height: 15vh; */
+    border-radius: 50%;
+    margin-left: 3vw;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/speech-recognition-icon.jpg);
+    background-size: cover;
+  }
+  #feature1:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  #feature2 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-4vh);
+    transform: translateY(-4vh);
+    width: 6%;
+    /*height: 80px; */
+    border-radius: 50%;
+    margin-left: 10vw;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/iris_control.jpg);
+    background-size: cover;
+  }
+  #feature2:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  #feature3 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-4vh);
+    transform: translateY(-4vh);
+    width: 6%;
+    /*height: 80px; */
+    border-radius: 50%;
+    margin-left: 17vw;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/captions_icon.jpg);
+    background-size: cover;
+  }
+  #feature3:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  #feature4 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-4vh);
+    transform: translateY(-4vh);
+    width: 6%;
+    /*height: 80px; */
+    border-radius: 50%;
+    margin-left: 24vw;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/braille-image.jpg);
+    background-size: cover;
+  }
+  #feature4:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  #feature5 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-4vh);
+    transform: translateY(-4vh);
+    width: 6%;
+    /*height: 80px; */
+    border-radius: 50%;
+    margin-left: 31vw;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/easeofaccess_icon.jpg);
+    background-size: cover;
+  }
+  #feature5:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  #feature6 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-4vh);
+    transform: translateY(-4vh);
+    width: 6%;
+    /*height: 80px; */
+    border-radius: 50%;
+    margin-left: 38vw;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/appearance_icon.jpg);
+    background-size: cover;
+  }
+  #feature6:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  #intro {
+    float: right;
+    position: absolute;
+    top: 50%;
+    /*right: 50%;*/
+    transform: translate(0, -20%);
+    padding-left: 55vw;
+  }
+}
+@media (max-width: 800px) {
+  #logo_main {
+    display: block;
+    margin-right: auto;
+    width: 75%;
+    /*min-width: 300px;*/
+    margin-left: auto;
+    padding: 30vh 0;
+    /*position: absolute;*/
+  }
+
+  #feature1 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-8vh);
+    transform: translateY(-8vh);
+    width: 7%;
+    min-width: 30px;
+    /*height: 15vh; */
+    border-radius: 50%;
+    margin-left: 14vw;
+    margin-right: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/speech-recognition-icon.jpg);
+    background-size: cover;
+  }
+  #feature1:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  #feature2 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-8vh);
+    transform: translateY(-8vh);
+    width: 7%;
+    min-width: 30px;
+    /*height: 15vh; */
+    border-radius: 50%;
+    margin-left: 24vw;
+    margin-right: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/iris_control.jpg);
+    background-size: cover;
+  }
+  #feature2:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  #feature3 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-8vh);
+    transform: translateY(-8vh);
+    width: 7%;
+    min-width: 30px;
+    /*height: 15vh; */
+    border-radius: 50%;
+    margin-left: 34vw;
+    margin-right: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/captions_icon.jpg);
+    background-size: cover;
+  }
+  #feature3:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  #feature4 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-8vh);
+    transform: translateY(-8vh);
+    width: 7%;
+    min-width: 30px;
+    /*height: 15vh; */
+    border-radius: 50%;
+    margin-left: 44vw;
+    margin-right: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/braille-image.jpg);
+    background-size: cover;
+  }
+  #feature4:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  #feature5 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-8vh);
+    transform: translateY(-8vh);
+    width: 7%;
+    min-width: 30px;
+    /*height: 15vh; */
+    border-radius: 50%;
+    margin-left: 54vw;
+    margin-right: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/easeofaccess_icon.jpg);
+    background-size: cover;
+  }
+  #feature5:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  #feature6 {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-8vh);
+    transform: translateY(-8vh);
+    width: 7%;
+    min-width: 30px;
+    /*height: 15vh; */
+    border-radius: 50%;
+    margin-left: 64.5vw;
+    margin-right: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    vertical-align: middle;
+    border: none;
+    background-image: url(/static/images/appearance_icon.jpg);
+    background-size: cover;
+  }
+  #feature6:after {
+    content: '';
+    padding-bottom: 100%;
+    display: block;
+  }
+  .container .reveal {
+    display: block;
+  }
+  #intro {
+    position: absolute;
+    /*top: 50%;*/
+    /*right: 50%;*/
+    transform: translate(0, -45%);
+    margin-right: 10%;
+    margin-left: 10%;
+    text-align: justify;
+    letter-spacing: 1px;
+  }
+}
+.container .hidden {
+  display: none;
+}
+#intro h2 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+#intro h3 {
+  font-weight: lighter;
+}
+#tutorial {
+  background: linear-gradient(57deg, #a43c58, #252141);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: fit-content;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  height: fit-content;
+  padding-bottom: 1.5vw;
+  padding-top: 1.5vw;
+  border-radius: 10%;
+  font-size: 1.5vw;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans',
+    'DejaVu Sans', Verdana, 'sans-serif';
+}
+@media (max-width: 200px) {
+  #intro {
+    font-size: 2vw;
+  }
+}
+@media (min-width: 200px) {
+  #intro {
+    font-size: 1.25vw;
+  }
+}
