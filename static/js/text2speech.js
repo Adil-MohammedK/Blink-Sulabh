@@ -41,11 +41,13 @@ $('#speak-button').on('click', function () {
 function textToSpeechPower() {
   if (document.getElementById('power').innerHTML == 'Off') {
     document.getElementById('power').innerHTML = 'On';
+    document.getElementById('power').style.backgroundColor = '#33cc33';
     console.log('TTS Power On');
     localStorage.setItem('TTS_Power', 'On');
   } else {
     document.getElementById('power').innerHTML = 'Off';
     console.log('TTS power Off');
+    document.getElementById('power').style.backgroundColor = '#e70808';
     localStorage.setItem('TTS_Power', 'Off');
   }
 }
@@ -63,57 +65,59 @@ function showCoords(event, type) {
   }
   coords = 'X coords: ' + x + ', Y coords: ' + y;
   // document.getElementById("coords").innerHTML = coords;
-  elementMouseIsOver = document.elementFromPoint(x, y);
-  var prevSrc = '';
-  // Changed part for ignoring whitespaces or html tags with a child tags more than 1
-  //text = elementMouseIsOver.innerText;
-  if (elementMouseIsOver.children.length > 0) {
-    if (elementMouseIsOver.children.length == 1) {
-      // document.getElementById('elementName').innerHTML =
-      //   elementMouseIsOver.childNodes[0].nodeValue; //takes the text value of the orginal tag and not child tag
-      var text = elementMouseIsOver.childNodes[0].nodeValue;
+  if (document.getElementById('power').innerHTML == 'On') {
+    elementMouseIsOver = document.elementFromPoint(x, y);
+    var prevSrc = '';
+    // Changed part for ignoring whitespaces or html tags with a child tags more than 1
+    //text = elementMouseIsOver.innerText;
+    if (elementMouseIsOver.children.length > 0) {
+      if (elementMouseIsOver.children.length == 1) {
+        // document.getElementById('elementName').innerHTML =
+        //   elementMouseIsOver.childNodes[0].nodeValue; //takes the text value of the orginal tag and not child tag
+        var text = elementMouseIsOver.childNodes[0].nodeValue;
+      } else {
+        return 0; //to ignore text inside child tags if present
+      }
     } else {
-      return 0; //to ignore text inside child tags if present
+      // document.getElementById('elementName').innerHTML =
+      //   elementMouseIsOver.innerText;
+      var text = elementMouseIsOver.innerText;
     }
-  } else {
-    // document.getElementById('elementName').innerHTML =
-    //   elementMouseIsOver.innerText;
-    var text = elementMouseIsOver.innerText;
-  }
 
-  //end of changes
-  if (elementMouseIsOver.tagName == 'IMG') {
-    text = elementMouseIsOver.alt;
-    if (elementMouseIsOver.alt == '' && prevSrc != elementMouseIsOver.src) {
-      processImage(elementMouseIsOver.src);
-      setTimeout((text = caption), 3000);
-      prevSrc = elementMouseIsOver.src;
+    //end of changes
+    if (elementMouseIsOver.tagName == 'IMG') {
+      text = elementMouseIsOver.alt;
+      if (elementMouseIsOver.alt == '' && prevSrc != elementMouseIsOver.src) {
+        processImage(elementMouseIsOver.src);
+        setTimeout((text = caption), 3000);
+        prevSrc = elementMouseIsOver.src;
+      }
+      console.log('TTS text: ' + text);
     }
-    console.log('TTS text: ' + text);
-  }
-  // document.getElementById("elementName").innerHTML = elementMouseIsOver.innerText;
+    // document.getElementById("elementName").innerHTML = elementMouseIsOver.innerText;
 
-  // else if (type == 'Touch')
+    // else if (type == 'Touch')
 
-  if ((text != '') & (document.getElementById('power').innerHTML == 'On')) {
-    var utter = new SpeechSynthesisUtterance();
-    utter.text = text;
-    utter.rate = 0.8;
-    utter.pitch = 0.5;
-    utter.voice = available_voices[$('#chosen-voice').val()];
-    var synth = window.speechSynthesis;
-    synth.speak(utter);
-    if (text != 'X') {
-      var innerHTML = elementMouseIsOver.innerHTML;
-      var index = innerHTML.indexOf(text);
-      if (index >= 0) {
-        innerHTML =
-          innerHTML.substring(0, index) +
-          '<mark>' +
-          innerHTML.substring(index, index + text.length) +
-          '</mark>' +
-          innerHTML.substring(index + text.length);
-        elementMouseIsOver.innerHTML = innerHTML;
+    if (text != '') {
+      var utter = new SpeechSynthesisUtterance();
+      utter.text = text;
+      utter.rate = 0.8;
+      utter.pitch = 0.5;
+      utter.voice = available_voices[$('#chosen-voice').val()];
+      var synth = window.speechSynthesis;
+      synth.speak(utter);
+      if (text != 'X') {
+        var innerHTML = elementMouseIsOver.innerHTML;
+        var index = innerHTML.indexOf(text);
+        if (index >= 0) {
+          innerHTML =
+            innerHTML.substring(0, index) +
+            '<mark>' +
+            innerHTML.substring(index, index + text.length) +
+            '</mark>' +
+            innerHTML.substring(index + text.length);
+          elementMouseIsOver.innerHTML = innerHTML;
+        }
       }
     }
   }
