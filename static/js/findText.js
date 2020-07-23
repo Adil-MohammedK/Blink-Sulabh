@@ -1,8 +1,14 @@
 var images = document.getElementsByTagName('img');
+// To change hrefs of img and add rural.nic.in to it
 for (var i = 0; i < images.length; i++) {
-  str = images[i].src.split('https://rural.nic.in/').pop();
-  images[i].src = 'https://rural.nic.in/' + str.split(window.origin).pop();
+  if (images[i].src.includes(window.origin)) {
+    str = images[i].src.split('https://rural.nic.in/').pop();
+    images[i].src = 'https://rural.nic.in/' + str.split(window.origin).pop();
+  }
 }
+$(document).ready(function () {
+  $("a[href='/']").attr('href', '/?name=home'); //To change links of home to custom home link
+});
 function findLinks(htmlString) {
   var $container = $('<div/>').html(htmlString);
 
