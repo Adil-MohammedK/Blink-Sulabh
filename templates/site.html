@@ -49,6 +49,7 @@
       <div id="body" class="body-bg">
         <div class="user">
           <button class="modal-btn">User Settings</button>
+          <button class="sulabh-home">Home</button>
         </div>
         {% autoescape false %} {{myCode.body}} {% endautoescape %}
       </div>
@@ -67,8 +68,8 @@
         <!--displays text inside of the tag-->
         <!-- <p id="elementName">elementText</p> -->
         <!-- Power button for text to speech feature-->
+        Click to Turn On/Off
         <button id="power" type="button" onclick="textToSpeechPower()"></button>
-        <h4>Example &mdash; Text to Speech</h4>
         <div id="demo-container">
           <select id="chosen-voice"></select
           ><input
@@ -81,7 +82,7 @@
       </div>
     </div>
 
-    <!-- <script src="{{url_for('static', filename='js/loader.js')}}"></script> -->
+    <script src="{{url_for('static', filename='js/loader.js')}}"></script>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
     <script src="{{url_for('static', filename='js/findText.js')}}"></script>
     <script src="{{url_for('static', filename='js/googleanalytics.js')}}"></script>
@@ -90,12 +91,15 @@
     <script src="{{url_for('static', filename='js/text2speech.js')}}"></script>
     <script src="https://usefulangle.com/sitejs/prism.js" defer></script>
     <script>
-      // var $container = $('<div/>').html(html);
       var TTS_Power = localStorage.getItem('TTS_Power');
       console.log('TTS Power on start: ' + TTS_Power);
-      if (TTS_Power == 'null')
+      if (TTS_Power == 'null' || TTS_Power == 'Off') {
         document.getElementById('power').innerHTML = 'Off';
-      document.getElementById('power').innerHTML = TTS_Power;
+        document.getElementById('power').style.backgroundColor = '#e70808';
+      } else if (TTS_Power == 'On') {
+        document.getElementById('power').innerHTML = 'On';
+        document.getElementById('power').style.backgroundColor = '#33cc33';
+      }
       var linkData, imgData;
       document.getElementById('LinkButton').onclick = function (linkData) {
         linkData = findLinks(html);
@@ -108,11 +112,15 @@
       var modalBtn = document.querySelector('.modal-btn');
       var modalBg = document.querySelector('.modal-bg');
       var modalClose = document.querySelector('.modal-close');
+      var sulabhHome = document.querySelector('.sulabh-home');
       modalBtn.addEventListener('click', function () {
         modalBg.classList.add('bg-active');
       });
       modalClose.addEventListener('click', function () {
         modalBg.classList.remove('bg-active');
+      });
+      sulabhHome.addEventListener('click', function () {
+        window.location.href = window.origin;
       });
     </script>
     <script>
