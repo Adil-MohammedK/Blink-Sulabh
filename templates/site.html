@@ -50,6 +50,9 @@
         <div class="user">
           <button class="modal-btn">User Settings</button>
           <button class="sulabh-home">Home</button>
+          <button id="startRecognizeOnceAsyncButton">
+            Start Voice Recognition(Shift+A)
+          </button>
         </div>
         {% autoescape false %} {{myCode.body}} {% endautoescape %}
       </div>
@@ -82,6 +85,7 @@
       </div>
     </div>
 
+    <script src="{{url_for('static', filename='js/microsoft.cognitiveservices.speech.sdk.bundle.js')}}"></script>
     <script src="{{url_for('static', filename='js/loader.js')}}"></script>
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
     <script src="{{url_for('static', filename='js/findText.js')}}"></script>
@@ -89,6 +93,7 @@
     <script src="{{url_for('static', filename='js/scrollbar.js')}}"></script>
     <script src="{{url_for('static', filename='js/image-caption.js')}}"></script>
     <script src="{{url_for('static', filename='js/text2speech.js')}}"></script>
+    <script src="{{url_for('static', filename='js/voice-recognition.js')}}"></script>
     <script src="https://usefulangle.com/sitejs/prism.js" defer></script>
     <script>
       var TTS_Power = localStorage.getItem('TTS_Power');
@@ -122,15 +127,7 @@
       sulabhHome.addEventListener('click', function () {
         window.location.href = window.origin;
       });
-    </script>
-    <script>
-      var head = document.getElementsByTagName('head')[0];
-      var js = document.createElement('script');
-
-      if (TTS) {
-        js.src = 'js/jquery_computer.js';
-      }
-      head.appendChild(js);
+      document.querySelector('.front-pop-overlay').style.display = 'none';
     </script>
   </body>
 </html>
