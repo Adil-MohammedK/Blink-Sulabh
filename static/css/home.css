@@ -239,6 +239,7 @@ body {
     border: none;
     background-image: url(/static/images/speech-recognition-icon.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature1:after {
     content: '';
@@ -260,6 +261,7 @@ body {
     border: none;
     background-image: url(/static/images/iris_control.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature2:after {
     content: '';
@@ -281,6 +283,7 @@ body {
     border: none;
     background-image: url(/static/images/captions_icon.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature3:after {
     content: '';
@@ -302,6 +305,7 @@ body {
     border: none;
     background-image: url(/static/images/braille-image.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature4:after {
     content: '';
@@ -323,6 +327,7 @@ body {
     border: none;
     background-image: url(/static/images/easeofaccess_icon.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature5:after {
     content: '';
@@ -344,6 +349,7 @@ body {
     border: none;
     background-image: url(/static/images/appearance_icon.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature6:after {
     content: '';
@@ -387,6 +393,7 @@ body {
     border: none;
     background-image: url(/static/images/speech-recognition-icon.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature1:after {
     content: '';
@@ -410,6 +417,7 @@ body {
     border: none;
     background-image: url(/static/images/iris_control.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature2:after {
     content: '';
@@ -433,6 +441,7 @@ body {
     border: none;
     background-image: url(/static/images/captions_icon.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature3:after {
     content: '';
@@ -456,6 +465,7 @@ body {
     border: none;
     background-image: url(/static/images/braille-image.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature4:after {
     content: '';
@@ -479,6 +489,7 @@ body {
     border: none;
     background-image: url(/static/images/easeofaccess_icon.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature5:after {
     content: '';
@@ -502,13 +513,14 @@ body {
     border: none;
     background-image: url(/static/images/appearance_icon.jpg);
     background-size: cover;
+    cursor: pointer;
   }
   #feature6:after {
     content: '';
     padding-bottom: 100%;
     display: block;
   }
-  .container .reveal {
+  .reveal {
     display: block;
   }
   #intro {
@@ -522,7 +534,7 @@ body {
     letter-spacing: 1px;
   }
 }
-.container .hidden {
+.hidden {
   display: none;
 }
 #intro h2 {
