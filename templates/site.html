@@ -41,10 +41,15 @@
         </p>
       </div>
     </div>
+    <div id="cursorImage">
+      <img style=" pointer-events: none; position: absolute; " <canvas style="
+      position: fixed; top: 0; left: 0; "
+    </div>
     <div
       id="main"
       onmousemove="showCoords(event,'Hover')"
       ontouchmove="showCoords(event,'Touch')"
+      onmousemove="findCoords(event)"
     >
       <div id="body" class="body-bg">
         <div class="user">
@@ -62,9 +67,6 @@
       <div class="modal">
         <button type="button" id="LinkButton">
           Links
-        </button>
-        <button type="button" id="ImgButton">
-          Imgs
         </button>
         <!-- contains the coodinates of the mouse
         <p id="coords">coords</p>
@@ -85,17 +87,20 @@
       </div>
     </div>
 
-    <script src="{{url_for('static', filename='js/microsoft.cognitiveservices.speech.sdk.bundle.js')}}"></script>
-    <script src="{{url_for('static', filename='js/loader.js')}}"></script>
+    <!-- <script src="{{url_for('static', filename='js/face-api.min.js')}}"></script>
+    <script defer src="{{url_for('static', filename='js/dlib.js')}}"></script> -->
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
+    <script src="{{url_for('static', filename='js/loader.js')}}"></script>
+    <script src="{{url_for('static', filename='js/microsoft.cognitiveservices.speech.sdk.bundle.js')}}"></script>
     <script src="{{url_for('static', filename='js/findText.js')}}"></script>
+    <script src="{{url_for('static', filename='js/voice-recognition.js')}}"></script>
     <script src="{{url_for('static', filename='js/googleanalytics.js')}}"></script>
     <script src="{{url_for('static', filename='js/scrollbar.js')}}"></script>
     <script src="{{url_for('static', filename='js/image-caption.js')}}"></script>
     <script src="{{url_for('static', filename='js/text2speech.js')}}"></script>
-    <script src="{{url_for('static', filename='js/voice-recognition.js')}}"></script>
     <script src="https://usefulangle.com/sitejs/prism.js" defer></script>
     <script>
+      var html = '';
       var TTS_Power = localStorage.getItem('TTS_Power');
       console.log('TTS Power on start: ' + TTS_Power);
       if (TTS_Power == 'null' || TTS_Power == 'Off') {
@@ -106,14 +111,6 @@
         document.getElementById('power').style.backgroundColor = '#33cc33';
       }
       var linkData, imgData;
-      document.getElementById('LinkButton').onclick = function (linkData) {
-        linkData = findLinks(html);
-        console.log(linkData);
-      };
-      document.getElementById('ImgButton').onclick = function (imgData) {
-        imgData = findLinks(html);
-        console.log(imgData);
-      };
       var modalBtn = document.querySelector('.modal-btn');
       var modalBg = document.querySelector('.modal-bg');
       var modalClose = document.querySelector('.modal-close');

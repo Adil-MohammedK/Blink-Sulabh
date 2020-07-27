@@ -6,6 +6,7 @@ document.head.appendChild(script); // add it to the end of the head section of t
 //       authorization tokens for your subscription.
 var authorizationEndpoint = 'token.php';
 var phrase;
+var mouseX, mouseY;
 
 function RequestAuthorizationToken() {
   if (authorizationEndpoint) {
@@ -160,6 +161,7 @@ function turnSpeech() {
       window.console.log(result);
       phrase = result.text;
       console.log(phrase);
+      statement(phrase);
       recognizer.close();
       recognizer = undefined;
     },
@@ -167,14 +169,45 @@ function turnSpeech() {
       startRecognizeOnceAsyncButton.disabled = false;
       phraseDiv += err;
       window.console.log(err);
-
       recognizer.close();
       recognizer = undefined;
     }
   );
 }
-// function statement(phrase = '') {
-//   if (phrase.toLowerCase.startsWith('Search for')) {
-//     string = phrase.toLowerCase.split('Search for').pop();
-//   }
-// }
+function findCoords(event) {
+  var mouseX = event.clientX;
+  var mouseY = event.clientY;
+}
+
+function statement(phrase = '') {
+  if (phrase.startsWith('Type')) {
+    elm = document.elementFromPoint(mouseX, mouseY);
+    elm.value = string;
+  } else if (phrase.startsWith('Find link')) {
+    string = phrase.split('Find link').pop();
+    speak('Finding ' + string);
+    for (i = 0; i < linkData.length; i++) {
+      string = string.trim().toLowerCase();
+      // if (linkData[i].indexOf(string) < 0) break;
+      findString = linkData[i][0].trim().toLowerCase() + '.';
+      if (findString != string) continue;
+      setTimeout(() => {
+        speak('Link found. Redirecting');
+      }, 1000);
+      change();
+      window.location.href = linkData[i][1];
+    }
+  } else if (phrase.startsWith('List out links')) {
+    speak('Listing out all links');
+    for (i = 19; i < linkData.length; i++) {
+      string = linkData[i][0].trim();
+      speak(string);
+      document.body.addEventListener('keydown', function (event) {
+        if (event.keyCode == '27') {
+          event.preventDefault();
+          window.speechSynthesis.cancel();
+        }
+      });
+    }
+  } else speak('Wrong command.Please try again');
+}
