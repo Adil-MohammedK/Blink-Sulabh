@@ -6,7 +6,7 @@ function clickOrigin(e) {
   tag.id = target.id;
   tag.parent = target.parentNode.tagName.toLowerCase();
   str = target.href;
-  urlEnd = str.split(window.origin + window.location.pathname).pop();
+  urlEnd = str.split(window.location.href).pop();
   console.log('Url tail:' + urlEnd);
   tag.href = urlEnd;
   console.log(tag);
@@ -22,9 +22,10 @@ var tagsToIdentify = ['img', 'a'];
 
 document.body.onclick = function (e) {
   elem = clickOrigin(e);
+  var locHash = window.location.href + '#';
   if (elem.href == 'javascript:void(0);') {
     return false;
-  } else if (elem.href == '#' || elem.href == ('${window.location.href}#`)) {
+  } else if (elem.href == '#' || elem.href.includes(locHash)) {
     return false;
   } else {
     for (i = 0; i < tagsToIdentify.length; i++) {
