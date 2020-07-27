@@ -52,7 +52,7 @@ function findLinks(htmlString) {
   //links function
   links = []; //return in function
   $container.find('a').each(function () {
-    links.push([this.innerText, this.href);
+    links.push([this.innerText, this.href]);
   });
   return links;
 }
