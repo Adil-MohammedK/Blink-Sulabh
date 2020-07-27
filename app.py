@@ -9,7 +9,7 @@ htmlCode = BeautifulSoup("",'lxml')
 head = ""
 body = ""
 html = ""
-url=""
+url = ""
 flag=False
 
 @app.route('/scrapper')
@@ -43,10 +43,6 @@ def loader(var1="", var2="", var3="", var4="", var5=""):
     print("Loader Fn")
     print(url)
     global flag
-    if flag == False:
-        flag = True
-        print("First Time")
-        return render_template("loading.html",text=url)
     global htmlCode
     htmlCode = scraper.scrapmain(url)
     global head
