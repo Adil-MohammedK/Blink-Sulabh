@@ -27,13 +27,8 @@ function getVoiceList() {
 
 $('#speak-button').on('click', function () {
   if ($.trim($('#speak-text').val()) != '') {
-    var utter = new SpeechSynthesisUtterance();
-    utter.text = $('#speak-text').val();
-    utter.rate = 0.8;
-    utter.pitch = 0.5;
-    utter.voice = available_voices[$('#chosen-voice').val()];
-
-    window.speechSynthesis.speak(utter);
+    var text = $('#speak-text').val();
+    speak(text);
   }
 });
 
@@ -55,7 +50,7 @@ function textToSpeechPower() {
 //text to speech based on mouse coodinates
 function showCoords(event, type) {
   var x, y, coords, elementMouseIsOver;
-  console.log('Event: ' + event);
+  // console.log('Event: ' + event);
   if (type == 'Hover') {
     x = event.clientX;
     y = event.clientY;
@@ -99,13 +94,7 @@ function showCoords(event, type) {
     // else if (type == 'Touch')
 
     if (text != '') {
-      var utter = new SpeechSynthesisUtterance();
-      utter.text = text;
-      utter.rate = 0.8;
-      utter.pitch = 0.5;
-      utter.voice = available_voices[$('#chosen-voice').val()];
-      var synth = window.speechSynthesis;
-      synth.speak(utter);
+      speak(text);
       if (text != 'X') {
         var innerHTML = elementMouseIsOver.innerHTML;
         var index = innerHTML.indexOf(text);
@@ -139,6 +128,15 @@ function showCoords(event, type) {
       });
   }
 }
+function speak(text) {
+  var utter = new SpeechSynthesisUtterance();
+  utter.text = text;
+  utter.rate = 0.8;
+  utter.pitch = 0.5;
+  utter.voice = available_voices[$('#chosen-voice').val()];
+  var synth = window.speechSynthesis;
+  synth.speak(utter);
+}
 function removeMark() {
   var mark = document.getElementsByTagName('mark');
   while (mark.length) {
@@ -148,4 +146,5 @@ function removeMark() {
     }
     parent.removeChild(mark[0]);
   }
+  console.log('Mark removed');
 }
