@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style type="text/css">
+      img {
+        pointer-events: none;
+        position: absolute;
+      }
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      * {
+        cursor: none;
+      }
+    </style>
+    <script src="{{url_for('static', filename='js/face-api.min.js')}}"></script>
+    <script defer src="{{url_for('static', filename='js/dlib.js')}}"></script>
+    <div id="container">
+      <video autoplay id="video"></video>
+    </div>
+  </body>
+</html>
