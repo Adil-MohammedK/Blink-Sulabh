@@ -179,7 +179,11 @@ async function statement(phrase = '') {
   if (phrase.startsWith('Type')) {
     elm = document.elementFromPoint(mouseX, mouseY);
     elm.value = string;
+<<<<<<< HEAD
   } else if (phrase.startsWith('Go to link')) {
+=======
+  } else if (phrase.startsWith('Move to link')) {
+>>>>>>> 2c3019080de2ace7de7c5528e01830ce0f50e8ad
     string = phrase.split('Find link').pop();
     speak('Finding ' + string);
     for (i = 0; i < linkData.length; i++) {
