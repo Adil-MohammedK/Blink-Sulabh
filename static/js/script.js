@@ -67,3 +67,18 @@ function findImages(htmlString) {
   });
   return imgs;
 }
+function findElements(tag, text, state, elem) {
+  var elements = document.getElementsByTagName(tag);
+  var found = [];
+  for (var i = 0; i < elements.length; i++) {
+    if (elements[i].innerText === text) {
+      found.push(elements[i], elements[i].style.outline);
+      if (state == true) elements[i].style.outline = '#4CAF50 solid 10px';
+      else elements[i].style.outline = elem[i][1];
+    }
+  }
+  return found;
+}
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

@@ -47,7 +47,8 @@ function keyMapper() {
       console.log('Buffer:' + buffer);
       lastKeyTime = currentTime;
     }
-    if (JSON.stringify(buffer) == '[16,65]') {
+    if (JSON.stringify(buffer) == '[16,38]') {
+      //Shift + up arrow
       console.log('Key Combo pressed');
       turnSpeech();
       buffer = [];
@@ -174,11 +175,11 @@ function findCoords(event) {
   var mouseY = event.clientY;
 }
 
-function statement(phrase = '') {
+async function statement(phrase = '') {
   if (phrase.startsWith('Type')) {
     elm = document.elementFromPoint(mouseX, mouseY);
     elm.value = string;
-  } else if (phrase.startsWith('Find link')) {
+  } else if (phrase.startsWith('Move to link')) {
     string = phrase.split('Find link').pop();
     speak('Finding ' + string);
     for (i = 0; i < linkData.length; i++) {
@@ -196,7 +197,10 @@ function statement(phrase = '') {
     speak('Listing out all links');
     for (i = 19; i < linkData.length; i++) {
       string = linkData[i][0].trim();
+      var outlineElem = findElements('a', linkData[i][0], true);
       speak(string);
+      // await sleep(500);
+      // outlineElem = findElements('a', linkData[i][0], false, outlineElem);
       document.body.addEventListener('keydown', function (event) {
         if (event.keyCode == '27') {
           event.preventDefault();
@@ -204,5 +208,30 @@ function statement(phrase = '') {
         }
       });
     }
+  } else if (phrase.startsWith('Page down')) {
+    var height = document.documentElement.clientHeight;
+    var id = setInterval(function () {
+      window.scrollBy(0, 1);
+      height--;
+      if (height < 1) clearInterval(id);
+    }, 1);
+  } else if (phrase.startsWith('Page up')) {
+    var height = document.documentElement.clientHeight;
+    var id = setInterval(function () {
+      window.scrollBy(0, -1);
+      height--;
+      if (height < 1) clearInterval(id);
+    }, 1);
+  } else if (phrase.startsWith('Page top')) {
+    $('html, body').animate({ scrollTop: '0' });
+  } else if (phrase.startsWith('Page bottom')) {
+    $('button').click(function () {
+      $('html, body').animate(
+        {
+          scrollTop: $('html, body').get(0).scrollHeight,
+        },
+        2000
+      );
+    });
   } else speak('Wrong command.Please try again');
 }
