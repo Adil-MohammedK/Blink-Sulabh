@@ -68,10 +68,6 @@
         <button type="button" id="LinkButton">
           Links
         </button>
-        <!-- contains the coodinates of the mouse
-        <p id="coords">coords</p>
-        <!--displays text inside of the tag-->
-        <!-- <p id="elementName">elementText</p> -->
         <!-- Power button for text to speech feature-->
         Click to Turn On/Off
         <button id="power" type="button" onclick="textToSpeechPower()"></button>
@@ -92,7 +88,6 @@
     <script src="{{url_for('static', filename='js/script.js')}}"></script>
     <script src="{{url_for('static', filename='js/loader.js')}}"></script>
     <script src="{{url_for('static', filename='js/microsoft.cognitiveservices.speech.sdk.bundle.js')}}"></script>
-    <script src="{{url_for('static', filename='js/findText.js')}}"></script>
     <script src="{{url_for('static', filename='js/voice-recognition.js')}}"></script>
     <script src="{{url_for('static', filename='js/googleanalytics.js')}}"></script>
     <script src="{{url_for('static', filename='js/scrollbar.js')}}"></script>
@@ -101,7 +96,7 @@
     <script src="https://usefulangle.com/sitejs/prism.js" defer></script>
     <script>
       var html = '';
-      var TTS_Power = localStorage.getItem('TTS_Power');
+      var TTS_Power = localStorage.getItem('screen_read');
       console.log('TTS Power on start: ' + TTS_Power);
       if (TTS_Power == 'null' || TTS_Power == 'Off') {
         document.getElementById('power').innerHTML = 'Off';

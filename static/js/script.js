@@ -34,7 +34,7 @@ $(document).ready(function () {
         console.log(html);
         linkData = findLinks(html);
         console.log(linkData);
-        imgData = findLinks(html);
+        imgData = findImages(html);
         console.log(imgData);
       });
     })

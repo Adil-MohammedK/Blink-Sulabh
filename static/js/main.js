@@ -201,64 +201,59 @@ function getSelectedCheckboxValues(name) {
 // const submitbtn = document.querySelector('#submitbtn');
 document.querySelectorAll('.submitbtn').forEach((item) => {
   item.addEventListener('click', (event) => {
-    console.log(getSelectedCheckboxValues('color'));
-    var check = getSelectedCheckboxValues('color');
+    console.log(getSelectedCheckboxValues());
+    var check = getSelectedCheckboxValues();
     putCheck(check);
   });
 });
 function putCheck(check) {
   for (let i = 0; i < check.length; i++) {
-    const element = check[i];
-    if (i == 0) {
-      if (element == 'Screen Reader') {
-        localStorage.setItem('screen_read', 'On');
-        console.log('Cookie made ');
-      } else {
-        localStorage.setItem('screen_read', 'Off');
-        console.log('Cookie made Off');
-      }
-    } else if (i == 1) {
-      if (element == 'Voice Commands') localStorage.setItem('voice_cmd', 'On');
-      else localStorage.setItem('voice_cmd', 'Off');
-    } else if (i == 2) {
-      if (element == 'Gesture Tracking')
-        localStorage.setItem('gesture_trk', 'On');
-      else localStorage.setItem('gesture_trk', 'Off');
-    } else if (i == 3) {
-      if (element == 'Image Video Captioning')
-        localStorage.setItem('img_caption', 'On');
-      else localStorage.setItem('img_caption', 'Off');
-    } else if (i == 4) {
-      if (element == 'Error and Success Messages')
-        localStorage.setItem('error_msg', 'On');
-      else localStorage.setItem('error_msg', 'Off');
-    } else if (i == 5) {
-      if (element == 'PDF generation for Text to Braille Conversion Devices')
-        localStorage.setItem('pdf_gen', 'On');
-      else localStorage.setItem('pdf_gen', 'Off');
-    } else if (i == 6) {
-      if (element == 'Spelling and Meaning Assistance')
-        localStorage.setItem('spell_assist', 'On');
-      else localStorage.setItem('spell_assist', 'Off');
-    } else if (i == 7) {
-      if (element == 'Keyboard Shortcuts')
-        localStorage.setItem('spell_assist', 'On');
-      else localStorage.setItem('spell_assist', 'Off');
-    } else if (i == 8) {
-      if (element == 'Font and Font Size Adjustment')
-        localStorage.setItem('font_adjust', 'On');
-      else localStorage.setItem('font_adjust', 'Off');
-    } else if (i == 9) {
-      if (element == 'Text Spacing') localStorage.setItem('text_spacing', 'On');
-      else localStorage.setItem('text_spacing', 'Off');
-    } else if (i == 10) {
-      if (element == 'Change Color Schemes')
-        localStorage.setItem('change_color', 'On');
-      else localStorage.setItem('change_color', 'Off');
-    } else if (i == 11) {
-      if (element == 'Button and Form Highlighting and Enlargement')
-        localStorage.setItem('button_higlight', 'On');
-      else localStorage.setItem('button_higlight', 'Off');
+    if (isThere(check, 'Screen Reader')) {
+      localStorage.setItem('screen_read', 'On');
+      console.log('Cookie made ');
+    } else {
+      localStorage.setItem('screen_read', 'Off');
+      console.log('Cookie made Off');
     }
+    if (isThere(check, 'Voice Commands'))
+      localStorage.setItem('voice_cmd', 'On');
+    else localStorage.setItem('voice_cmd', 'Off');
+    if (isThere(check, 'Text Highlighting'))
+      localStorage.setItem('text_highlight', 'On');
+    else localStorage.setItem('text_highlight', 'Off');
+    if (isThere(check, 'Gesture Tracking'))
+      localStorage.setItem('gesture_trk', 'On');
+    else localStorage.setItem('gesture_trk', 'Off');
+    if (isThere(check, 'Image Video Captioning'))
+      localStorage.setItem('img_caption', 'On');
+    else localStorage.setItem('img_caption', 'Off');
+    if (isThere(check, 'Error and Success Messages'))
+      localStorage.setItem('error_msg', 'On');
+    else localStorage.setItem('error_msg', 'Off');
+    if (isThere(check, 'PDF generation for Text to Braille Conversion Devices'))
+      localStorage.setItem('pdf_gen', 'On');
+    else localStorage.setItem('pdf_gen', 'Off');
+    if (isThere(check, 'Spelling and Meaning Assistance'))
+      localStorage.setItem('spell_assist', 'On');
+    else localStorage.setItem('spell_assist', 'Off');
+    if (isThere(check, 'Keyboard Shortcuts'))
+      localStorage.setItem('spell_assist', 'On');
+    else localStorage.setItem('spell_assist', 'Off');
+    if (isThere(check, 'Font and Font Size Adjustment'))
+      localStorage.setItem('font_adjust', 'On');
+    else localStorage.setItem('font_adjust', 'Off');
+    if (isThere(check, 'Text Spacing'))
+      localStorage.setItem('text_spacing', 'On');
+    else localStorage.setItem('text_spacing', 'Off');
+    if (isThere(check, 'Change Color Schemes'))
+      localStorage.setItem('change_color', 'On');
+    else localStorage.setItem('change_color', 'Off');
+    if (isThere(check, 'Button and Form Highlighting and Enlargement'))
+      localStorage.setItem('button_higlight', 'On');
+    else localStorage.setItem('button_higlight', 'Off');
   }
+}
+function isThere(arr, name) {
+  const found = arr.some((el) => el === name);
+  return found;
 }

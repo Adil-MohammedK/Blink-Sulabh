@@ -180,7 +180,7 @@ async function statement(phrase = '') {
     elm = document.elementFromPoint(mouseX, mouseY);
     elm.value = string;
   } else if (phrase.startsWith('Go to link')) {
-    string = phrase.split('Find link').pop();
+    string = phrase.split('Go to link').pop();
     speak('Finding ' + string);
     for (i = 0; i < linkData.length; i++) {
       string = string.trim().toLowerCase();
@@ -208,23 +208,23 @@ async function statement(phrase = '') {
         }
       });
     }
-  } else if (phrase.startsWith('Page down')) {
+  } else if (phrase.startsWith('Document down')) {
     var height = document.documentElement.clientHeight;
     var id = setInterval(function () {
       window.scrollBy(0, 1);
       height--;
       if (height < 1) clearInterval(id);
     }, 1);
-  } else if (phrase.startsWith('Page up')) {
+  } else if (phrase.startsWith('Document up')) {
     var height = document.documentElement.clientHeight;
     var id = setInterval(function () {
       window.scrollBy(0, -1);
       height--;
       if (height < 1) clearInterval(id);
     }, 1);
-  } else if (phrase.startsWith('Page top')) {
+  } else if (phrase.startsWith('Document top')) {
     $('html, body').animate({ scrollTop: '0' });
-  } else if (phrase.startsWith('Page bottom')) {
+  } else if (phrase.startsWith('Document bottom')) {
     $('button').click(function () {
       $('html, body').animate(
         {

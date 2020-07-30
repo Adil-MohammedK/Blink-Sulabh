@@ -1,4 +1,5 @@
 var available_voices;
+var x, y, coords;
 
 if (window.speechSynthesis.getVoices().length == 0) {
   window.speechSynthesis.addEventListener('voiceschanged', function () {
@@ -38,18 +39,18 @@ function textToSpeechPower() {
     document.getElementById('power').innerHTML = 'On';
     document.getElementById('power').style.backgroundColor = '#33cc33';
     console.log('TTS Power On');
-    localStorage.setItem('TTS_Power', 'On');
+    localStorage.setItem('screen_read', 'On');
   } else {
     document.getElementById('power').innerHTML = 'Off';
     console.log('TTS power Off');
     document.getElementById('power').style.backgroundColor = '#e70808';
-    localStorage.setItem('TTS_Power', 'Off');
+    localStorage.setItem('screen_read', 'Off');
   }
 }
 
 //text to speech based on mouse coodinates
-function showCoords(event, type) {
-  var x, y, coords, elementMouseIsOver;
+async function showCoords(event, type) {
+  var elementMouseIsOver;
   // console.log('Event: ' + event);
   if (type == 'Hover') {
     x = event.clientX;
@@ -59,43 +60,36 @@ function showCoords(event, type) {
     y = event.touches[0].clientY;
   }
   coords = 'X coords: ' + x + ', Y coords: ' + y;
-  // document.getElementById("coords").innerHTML = coords;
   if (document.getElementById('power').innerHTML == 'On') {
     elementMouseIsOver = document.elementFromPoint(x, y);
     var prevSrc = '';
-    // Changed part for ignoring whitespaces or html tags with a child tags more than 1
-    //text = elementMouseIsOver.innerText;
     if (elementMouseIsOver.children.length > 0) {
       if (elementMouseIsOver.children.length == 1) {
-        // document.getElementById('elementName').innerHTML =
-        //   elementMouseIsOver.childNodes[0].nodeValue; //takes the text value of the orginal tag and not child tag
         var text = elementMouseIsOver.childNodes[0].nodeValue;
       } else {
         return 0; //to ignore text inside child tags if present
       }
     } else {
-      // document.getElementById('elementName').innerHTML =
-      //   elementMouseIsOver.innerText;
       var text = elementMouseIsOver.innerText;
     }
 
     //end of changes
     if (elementMouseIsOver.tagName == 'IMG') {
       text = elementMouseIsOver.alt;
-      if (elementMouseIsOver.alt == '' && prevSrc != elementMouseIsOver.src) {
-        processImage(elementMouseIsOver.src);
-        setTimeout((text = caption), 3000);
-        prevSrc = elementMouseIsOver.src;
-      }
+      // if (elementMouseIsOver.alt == '' && prevSrc != elementMouseIsOver.src) {
+      //   processImage(elementMouseIsOver.src);
+      //   text = caption;
+      //   prevSrc = elementMouseIsOver.src;
+      //   sleep(2000);
+      // }
       console.log('TTS text: ' + text);
     }
-    // document.getElementById("elementName").innerHTML = elementMouseIsOver.innerText;
-
-    // else if (type == 'Touch')
 
     if (text != '') {
       speak(text);
-      if (text != 'X') {
+      var textMark = localStorage.getItem('text_highlight');
+      console.log(textMark);
+      if (text != 'X' && textMark == 'On') {
         var innerHTML = elementMouseIsOver.innerHTML;
         var index = innerHTML.indexOf(text);
         if (index >= 0) {
