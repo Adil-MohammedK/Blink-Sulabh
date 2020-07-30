@@ -541,6 +541,12 @@ body {
     font-size: 2.25vw;
     height: fit-content;
   }
+  #rural-home {
+    transform: translateY(-40%);
+    margin-left: 6%;
+    font-size: 2.25vw;
+    height: fit-content;
+  }
   #intro_h3 {
     transform: translateY(0%);
     font-size: 2.5vh;
@@ -605,6 +611,20 @@ body {
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans',
     'DejaVu Sans', Verdana, 'sans-serif';
 }
+#rural-home {
+  background: linear-gradient(57deg, #a43c58, #252141);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: fit-content;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  padding-bottom: 0.5vw;
+  padding-top: 0.5vw;
+  border-radius: 10%;
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans',
+    'DejaVu Sans', Verdana, 'sans-serif';
+}
 @media (min-width: 945px) {
   #tut {
     float: left;
@@ -632,6 +652,12 @@ body {
   #tutorial {
     transform: translateY(-200%);
     margin-left: 3.5%;
+    font-size: 1.5vw;
+    height: fit-content;
+  }
+  #rural-home {
+    transform: translateY(-200%);
+    margin-left: 5%;
     font-size: 1.5vw;
     height: fit-content;
   }
@@ -687,6 +713,12 @@ body {
   #tutorial {
     transform: translateY(-200%);
     margin-left: 3.5%;
+    font-size: 1.5vw;
+    height: fit-content;
+  }
+  #rural-home {
+    transform: translateY(-200%);
+    margin-left: 5%;
     font-size: 1.5vw;
     height: fit-content;
   }
